@@ -1,5 +1,5 @@
 # saint
-(my) sad ass install (script) (for debian)
+(my) stupid ass install (script) (for debian)
 ## depends
 git  
 make  
