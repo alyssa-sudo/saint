@@ -11,7 +11,7 @@ EOM
 apt-get update && apt-get full-upgrade
 
 # gnome-wipe
-apt-get purge seahorse totem rhythmbox evince gnome-software gnome-calculator software-properties-gtk firefox-esr gnome-system-monitor gnome-maps gnome-weather gnome-contacts gnome-clocks gnome-calendar gedit simple-scan gnome-font-viewer gnome-disk-utility gnome-connections gnome-logs eog baobab neovim cheese gnome-games gnome-sound-recorder im-config evolution synaptic shotwell gnome-todo transmission-gtk gnome-characters gnome-music malcontent file-roller gnome-documents && apt-get autoremove && apt-get upgrade && apt-get update
+apt-get purge epiphany seahorse totem rhythmbox evince gnome-software gnome-calculator software-properties-gtk firefox-esr gnome-system-monitor gnome-maps gnome-weather gnome-contacts gnome-clocks gnome-calendar gedit simple-scan gnome-font-viewer gnome-disk-utility gnome-connections gnome-logs eog baobab neovim cheese gnome-games gnome-sound-recorder im-config evolution synaptic shotwell gnome-todo transmission-gtk gnome-characters gnome-music malcontent file-roller gnome-documents && apt-get autoremove && apt-get upgrade && apt-get update
 
 # enable 32-bit
 dpkg --add-architecture i386 && apt-get update && apt-get upgrade
