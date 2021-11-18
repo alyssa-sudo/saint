@@ -1,5 +1,5 @@
 # saint
-sad ass install (script) for debian
+(my) sad ass install (script) (for debian)
 ## depends
 git  
 make  
