@@ -11,6 +11,6 @@ run as root
 sudo apt install git make
 git clone https://github.com/analice-sudo/saint
 cd saint
-sudo make install
+sudo make install && cd
 sudo saint
 ```
