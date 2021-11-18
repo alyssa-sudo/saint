@@ -1,36 +1,85 @@
 #!/bin/sh -e
 
-# change to sources list sid
+## change to sources list sid ~
 >/etc/apt/sources.list cat - <<EOM
 deb http://deb.debian.org/debian/ sid main contrib non-free
 deb-src http://deb.debian.org/debian/ sid main contrib non-free
 EOM
 
-# upgrade to sid
+## upgrade to sid ~
 
-apt-get update && apt-get full-upgrade
+apt-get update
+apt-get full-upgrade
 
-# gnome-wipe
-apt-get purge epiphany seahorse totem rhythmbox evince gnome-software gnome-calculator software-properties-gtk firefox-esr gnome-system-monitor gnome-maps gnome-weather gnome-contacts gnome-clocks gnome-calendar gedit simple-scan gnome-font-viewer gnome-disk-utility gnome-connections gnome-logs eog baobab neovim cheese gnome-games gnome-sound-recorder im-config evolution synaptic shotwell gnome-todo transmission-gtk gnome-characters gnome-music malcontent file-roller gnome-documents && apt-get autoremove && apt-get upgrade && apt-get update
+## gnome-wipe ~
+apt-get purge epiphany-browser seahorse totem rhythmbox evince gnome-software gnome-calculator software-properties-gtk firefox-esr gnome-system-monitor gnome-maps gnome-weather gnome-contacts gnome-clocks gnome-calendar gedit simple-scan gnome-font-viewer gnome-disk-utility gnome-connections gnome-logs eog baobab neovim cheese gnome-games gnome-sound-recorder im-config evolution synaptic shotwell gnome-todo transmission-gtk gnome-characters gnome-music malcontent file-roller gnome-documents 
+apt-get autoremove 
+apt-get upgrade 
+apt-get update
 
-# enable 32-bit
-dpkg --add-architecture i386 && apt-get update && apt-get upgrade
+## enable 32-bit ~
+dpkg --add-architecture i386 
+apt-get update 
+apt-get upgrade
 
-# Install needed applications
-apt-get install micro htop xserver-xorg-core firefox power-profiles-daemon flatpak
+## Install needed applications ~
+apt-get install micro xserver-xorg-core firefox power-profiles-daemon torbrowser-launcher audacity openbox rofi tint2 sway 
 
-# flatpak & discord; comment if needed
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && flatpak install flathub com.discordapp.Discord
+## save from gnome wanted (Add your wanted here) ~
+# apt-get install gnome-chess aisleriot quadrapassel
 
-# save wanted (Add your wanted here)
-apt-get install gnome-chess aisleriot quadrapassel
+## extra scripts ~
 
-# remove yelp, reinstalls self on any gnome app
+# joplin
+wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+
+# reaper
+wget https://www.reaper.fm/files/6.x/reaper642_linux_x86_64.tar.xz
+tar xf reaper 
+cd $HOME/reaper642_linux_x86_64
+./install-reaper.sh --install /opt --usr-local-bin-symlink --integrated-desktop
+rm -rf $HOME/reaper642_linux_x86_64 $HOME/reaper642_linux_x86_64.zip
+
+# mononoki
+mkdir $HOME/.local/share/fonts/
+wget https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Mononoki.zip
+mv Mononoki.zip $HOME/Downloads
+cd $HOME/Downloads
+unzip Mononoki.zip -d $HOME/.local/share/fonts/mononoki
+rm Mononoki.zip
+cd
+
+# alacritty
+wget https://github.com/barnumbirr/alacritty-debian/releases/download/v0.9.0-2/alacritty_0.9.0-2_amd64_unstable.deb
+dpkg -i alacritty_0.9.0-2_amd64_unstable.deb
+rm alacritty_0.9.0-2_amd64_unstable.deb
+
+# patched openbox
+apt build-dep openbox
+git clone https://github.com/Stardust-kyun/openbox
+cd openbox
+./bootstrap
+./configure --prefix=/usr --sysconfdir=/etc
+make
+make install
+cd
+rm -rf openbox
+
+# patched picom
+apt build-dep picom
+git clone https://github.com/ibhagwan/picom/tree/next-rebase
+cd picom
+git submodule update --init --recursive
+meson --buildtype=release . build
+ninja -C build
+ninja -C build install
+
+# remove yelp, reinstalls self on any gnome app ~
 apt-get purge yelp
 
-# purge Extra
+## purge Extra ~
 # apt-get purge
 
-# reboot
+# reboot ~
 reboot
 
