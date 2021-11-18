@@ -4,8 +4,8 @@
 git  
 make  
 ## advice
-uncomment purge line to purge specific softwares
-user must be root
+uncomment purge line to purge specific softwares  
+run as root
 ## install
 ```
 sudo apt install git make
