@@ -1,5 +1,5 @@
 # saint
-Personal Gnome Install Script  
+sad ass install (script) for debian
 ## depends
 git  
 make  
